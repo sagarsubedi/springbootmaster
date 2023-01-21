@@ -2,10 +2,10 @@
 
 package com.example.springmaster.customer;
 
-import com.example.springmaster.SpringmasterApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +32,7 @@ public class CustomerController {
     }
 
     @PostMapping()
-    void createCustomer(@RequestBody Customer customer){
+    void createCustomer( @Valid @RequestBody Customer customer){
         System.out.println("Customer created");
     }
 
