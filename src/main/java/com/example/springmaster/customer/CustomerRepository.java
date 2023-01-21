@@ -9,10 +9,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@Repository // more precise
+// @Repository // more precise
 //@Component
 // when we annotate with component, spring creates new instance of the class. default scope is singleton
-@Primary
 public class CustomerRepository implements ICustomerRepo{
 
     @Override
