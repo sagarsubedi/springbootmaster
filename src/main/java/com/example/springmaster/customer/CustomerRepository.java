@@ -1,6 +1,7 @@
 // This is the DAO Layer. Client -> Controller -> Service -> DAO
 package com.example.springmaster.customer;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,8 +13,11 @@ public class CustomerRepository implements ICustomerRepo{
     @Override
     public List<Customer> getCustomers(){
         // TODO connect to real DB
-        return Collections.singletonList(
-                new Customer(1L, "TODO. Implement real DB", "realrepopassword")
+        return List.of (
+                new Customer(1L, "TODO. Implement real DB", "realrepopassword"),
+                new Customer(2L, "TODO. code front end", "realrepopassword"),
+                new Customer(3L, "TODO. host in db", "realrepopassword"),
+                new Customer(4L, "TODO. setup ci/cd", "realrepopassword")
         );
     }
 }

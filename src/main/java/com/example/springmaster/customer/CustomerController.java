@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(path="/api/v1/customers")
+// @Deprecated will deprecate the api and helps in documentation as well
 public class CustomerController {
 
     // for dependency injection
@@ -19,12 +21,17 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/api/customer")
+    @GetMapping()
     public List<Customer> getCustomers(){
         return customerService.getCustomers();
     }
 
-    @PostMapping("/api/customer")
+    @GetMapping(path = "{customerId}")
+    Customer getCustomer(@PathVariable("customerId") Long id){
+        return customerService.getCustomer(id);
+    }
+
+    @PostMapping()
     void createCustomer(@RequestBody Customer customer){
         System.out.println("Customer created");
     }
@@ -34,7 +41,7 @@ public class CustomerController {
         System.out.println("Customer with id "  + id  +" deleted");
     }
 
-    @PutMapping("/api/customer")
+    @PutMapping()
     void updateCustomer(@RequestBody Customer customer){
         System.out.println("Update request for customer ");
     }
