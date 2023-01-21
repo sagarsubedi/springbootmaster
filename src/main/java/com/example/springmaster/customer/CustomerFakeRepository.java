@@ -10,7 +10,7 @@ public class CustomerFakeRepository implements ICustomerRepo{
     @Override
     public List<Customer> getCustomers(){
         return Collections.singletonList(
-                new Customer(1L, "this is from fake repo", "testpassword")
+                new Customer(1L, "this is from fake repo", "testpassword", "email@gmail.com")
         );
     }
 }
