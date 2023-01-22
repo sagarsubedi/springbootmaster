@@ -1,6 +1,7 @@
 // this is the Service Layer. Client -> Controller -> Service -> DAO
 package com.example.springmaster.customer;
 
+import com.example.springmaster.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class CustomerService {
                 .stream()
                 .filter(customer -> customer.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("customer with id " + id + " not found"));
+                .orElseThrow(() -> new NotFoundException(String.format("Customer with id %d not found.", id)));
     }
 
 }
