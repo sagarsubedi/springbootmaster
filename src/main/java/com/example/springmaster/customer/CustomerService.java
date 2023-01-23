@@ -2,6 +2,8 @@
 package com.example.springmaster.customer;
 
 import com.example.springmaster.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,8 @@ import java.util.List;
 // instance instead of multiple
 public class CustomerService {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
+
     // Repository Dependency injection needed
     private final ICustomerRepository customerRepository;
 
@@ -25,13 +29,19 @@ public class CustomerService {
     }
 
     List<Customer> getCustomers(){
+        LOGGER.info("getCustomers() was called");
         return customerRepository.findAll();
     }
 
     Customer getCustomer(Long id){
+        LOGGER.info("getCustomer() called");
         return customerRepository
                 .findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Customer with id %d not found.", id)));
+                .orElseThrow(() -> {
+                    NotFoundException notFoundException = new NotFoundException(String.format("Customer with id %d not found.", id));
+                    LOGGER.error(String.format("Error in getting customer %d", id), notFoundException);
+                    return notFoundException;
+                });
     }
 
 }
