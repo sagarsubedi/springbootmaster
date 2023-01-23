@@ -5,24 +5,34 @@ package com.example.springmaster.customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
+@Entity
+@Table
 public class Customer {
-    private final Long id;
+
+    @Id
+    private  Long id;
 
     @NotBlank(message = "name cannot be empty")
-    private final String name;
+    private  String name;
 
     @NotBlank(message = "password cannot be empty")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private final String password;
+    private  String password;
 
     @Email
     @NotBlank(message = "email cannot be empty")
-    // look a the javax.validation.constraints package for more constraints
-    private final String email;
+    // look at the javax.validation.constraints package for more constraints
+    private String email;
+
+    public Customer() {
+    }
 
     // we need the getters so that data can be sent as json
     // getId -> get will be removed and id becomes key for the json
@@ -34,6 +44,10 @@ public class Customer {
 
     public String getName() {
         return name;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @JsonIgnore

@@ -4,7 +4,7 @@ package com.example.springmaster.customer;
 import java.util.Collections;
 import java.util.List;
 
-
+@Deprecated
 public class CustomerFakeRepository implements ICustomerRepo{
 
     @Override

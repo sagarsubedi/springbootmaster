@@ -17,22 +17,20 @@ import java.util.List;
 public class CustomerService {
 
     // Repository Dependency injection needed
-    private final ICustomerRepo customerRepo;
+    private final ICustomerRepository customerRepository;
 
     @Autowired
-    public CustomerService(ICustomerRepo customerRepo){
-        this.customerRepo = customerRepo;
+    public CustomerService(ICustomerRepository customerRepository){
+        this.customerRepository = customerRepository;
     }
 
     List<Customer> getCustomers(){
-        return customerRepo.getCustomers();
+        return customerRepository.findAll();
     }
 
     Customer getCustomer(Long id){
-        return getCustomers()
-                .stream()
-                .filter(customer -> customer.getId().equals(id))
-                .findFirst()
+        return customerRepository
+                .findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Customer with id %d not found.", id)));
     }
 

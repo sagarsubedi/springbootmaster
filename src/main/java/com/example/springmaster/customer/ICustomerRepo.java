@@ -3,6 +3,7 @@ package com.example.springmaster.customer;
 
 import java.util.List;
 
+@Deprecated
 public interface ICustomerRepo {
 
     List<Customer> getCustomers();
