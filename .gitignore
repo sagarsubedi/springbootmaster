@@ -32,4 +32,3 @@ build/
 .vscode/
 
 ### SQL files###
-*.sql
