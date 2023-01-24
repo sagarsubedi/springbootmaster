@@ -1,5 +1,6 @@
 package com.example.springmaster.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,9 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.ZonedDateTime;
 
 @ControllerAdvice
-public class ApiExceptionHandler {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(ApiExceptionHandler.class);
+public class ApiExceptionHandler {
 
     @ExceptionHandler(value = ApiRequestException.class)
     public ResponseEntity<Object> handleApiRequestException(ApiRequestException apiRequestException){

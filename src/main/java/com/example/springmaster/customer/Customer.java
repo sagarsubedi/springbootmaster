@@ -4,16 +4,23 @@ package com.example.springmaster.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 @Entity
 @Table
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
 
     @Id
@@ -30,9 +37,6 @@ public class Customer {
     @NotBlank(message = "email cannot be empty")
     // look at the javax.validation.constraints package for more constraints
     private String email;
-
-    public Customer() {
-    }
 
     // we need the getters so that data can be sent as json
     // getId -> get will be removed and id becomes key for the json
@@ -56,19 +60,15 @@ public class Customer {
     }
 
     @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Customer customer = (Customer) o;
+        return id != null && Objects.equals(id, customer.id);
     }
 
-    public Customer(Long id, String name, String password, String email) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
