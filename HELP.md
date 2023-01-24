@@ -1,4 +1,4 @@
-# Spring Boot Master Course
+# Spring Boot
 ## Topics Learned
 1. N-Tier Application
 2. Dependency Injection
